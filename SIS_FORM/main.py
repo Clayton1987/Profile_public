@@ -3,7 +3,7 @@ from tkinter import *
 
 # Importando Calendario
 #from tkcalendar import Calendar, DateEntry
-from tkcalendar import DateEntry
+#from tkcalendar import DateEntry
 
 
 ################ cores ######################
@@ -76,22 +76,41 @@ class app():
         self.lb_dat_con = Label(self.frame_baixo, text="Data Consulta: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
         self.lb_dat_con.place(x=10,y=190)
 
-        self.ent_dat_con = DateEntry(self.frame_baixo,  width=12, backgroud='dakrblue', foreground='white', borderwidth=2)
+        self.ent_dat_con = Entry(self.frame_baixo,  width=12,justify='left', relief='solid') #, backgroud='darkblue', foreground='white', borderwidth=2)
         self.ent_dat_con.place(x=12,y=220)
 
         # ESTADO CONSULTA
-        self.lb_dat_con = DateEntry(self.frame_baixo, text="Estado Consulta: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
-        self.lb_dat_con.place(x=10,y=190)
-
-        self.ent_dat_con = Entry(self.frame_baixo, width=12, backgroud='dakrblue', foreground='white', borderwidth=2)
-        self.ent_dat_con.place(x=12,y=220)
-
-        # CONSULTA
         self.lb_dat_con = Label(self.frame_baixo, text="Estado Consulta: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
-        self.lb_dat_con.place(x=10,y=190)
+        self.lb_dat_con.place(x=150,y=190)
+
+        self.ent_dat_con = Entry(self.frame_baixo, width=15,justify='left', relief='solid') #, backgroud='darkblue', foreground='white', borderwidth=2)
+        self.ent_dat_con.place(x=152,y=220)
+
+        # SOBRE CONSULTA
+        self.lb_dat_con = Label(self.frame_baixo, text="Informações Extra: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
+        self.lb_dat_con.place(x=10,y=250)
 
         self.ent_dat_con = Entry(self.frame_baixo, width=35, justify='left', relief='solid')
-        self.ent_dat_con.place(x=12,y=220)
+        self.ent_dat_con.place(x=12,y=280)
+
+        ####################### Botoes ###########################
+        # Inserir
+        self.bt_inserir = Button(self.frame_baixo, text="Inserir", width=10, anchor='center', font=('arial 10 bold'), bg=cor6, fg=cor1, relief='raised', overrelief='ridge')
+        self.bt_inserir.place(x=10,y=320)
+
+        # Alterar
+        self.bt_inserir = Button(self.frame_baixo, text="Alterar", width=10, anchor='center', font=('arial 10 bold'), bg=cor2, fg=cor1, relief='raised', overrelief='ridge')
+        self.bt_inserir.place(x=110,y=320)
+
+        # Deletar
+        self.bt_inserir = Button(self.frame_baixo, text="Deletar", width=10, anchor='center', font=('arial 10 bold'), bg=cor7, fg=cor1, relief='raised', overrelief='ridge')
+        self.bt_inserir.place(x=210,y=320)
+
+        # Limpar
+        self.bt_inserir = Button(self.frame_baixo, text="Limpar", width=10, anchor='center', font=('arial 10 bold'), bg=cor3, fg=cor1, relief='raised', overrelief='ridge')
+        self.bt_inserir.place(x=110,y=350)
+
+
 
 if __name__ == "__main__":
     app()
