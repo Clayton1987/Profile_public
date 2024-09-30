@@ -1,8 +1,9 @@
 #Importando o Tkinter
 from tkinter import *
+from tkinter import ttk
 
 # Importando Calendario
-#from tkcalendar import Calendar, DateEntry
+from tkcalendar import Calendar, DateEntry
 #from tkcalendar import DateEntry
 
 
@@ -33,6 +34,7 @@ class app():
         self.janela.resizable(width=FALSE,height=True)
         self.frames()
         self.widgets()
+        self.grid_view()
         self.janela.mainloop()
 
 
@@ -76,7 +78,7 @@ class app():
         self.lb_dat_con = Label(self.frame_baixo, text="Data Consulta: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
         self.lb_dat_con.place(x=10,y=190)
 
-        self.ent_dat_con = Entry(self.frame_baixo,  width=12,justify='left', relief='solid') #, backgroud='darkblue', foreground='white', borderwidth=2)
+        self.ent_dat_con = DateEntry(self.frame_baixo,  width=12,justify='left', relief='solid') #, backgroud='darkblue', foreground='white', borderwidth=2)
         self.ent_dat_con.place(x=12,y=220)
 
         # ESTADO CONSULTA
@@ -109,6 +111,50 @@ class app():
         # Limpar
         self.bt_inserir = Button(self.frame_baixo, text="Limpar", width=10, anchor='center', font=('arial 10 bold'), bg=cor3, fg=cor1, relief='raised', overrelief='ridge')
         self.bt_inserir.place(x=110,y=350)
+
+        
+
+    def grid_view(self):
+        self.lista = [[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7]]
+
+        # Lista HEAD
+        self.tab_head = ['ID','Nome','email','telefone','Data','Estado','Sobre']
+
+        #Criando a Tabela
+        self.tree = ttk.Treeview(self.frame_direita, selectmode="extended", column=self.tab_head, show="headings")
+
+        # Vertical scrollbar
+        vsb = ttk.Scrollbar(self.frame_direita, orient="vertical", command=self.tree.yview)
+        vsb.grid(column=1, row=0, sticky='nsew')
+
+        # horizontal scrollbar
+        hsb = ttk.Scrollbar(self.frame_direita, orient="horizontal", command=self.tree.xview)
+        hsb.grid(column=0, row=1, sticky='nsew')
+
+
+        self.tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+        self.tree.grid(column=0, row=0, sticky='nsew')
+
+        self.frame_direita.grid_rowconfigure(0, weight=12)
+
+        self.hd = ["nw","nw","nw","nw","nw","center","center"]
+        self.h = [30,170,140,100,120,50,100]
+        self.n = 0
+
+        for col in self.tab_head:
+            self.tree.heading(col, text=col.title(), anchor='center')
+            # Ajuste colunas width e head
+            self.tree.column(col, anchor=self.hd[self.n], width=self.h[self.n])
+
+            self.n+=1
+
+        for item in self.lista:
+            self.tree.insert('','end',values=item)
+            
+
+
+
+
 
 
 
