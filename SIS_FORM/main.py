@@ -1,11 +1,14 @@
 #Importando o Tkinter
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 # Importando Calendario
 from tkcalendar import Calendar, DateEntry
 #from tkcalendar import DateEntry
 
+# Importando o views
+from view import *
 
 ################ cores ######################
 
@@ -23,8 +26,26 @@ cor9 = "#e9edf5" # skyblue
 
 
 ################ APP ######################
+class funcs():
+    def inserir_dados(self):
+        # Inserir dados no banco de dados
+        self.nome = self.ent_nome.get()
+        self.email = self.ent_email.get()
+        self.phone = self.ent_phone.get()
+        self.data = self.ent_dat_con.get()
+        self.estado = self.ent_estado.get()
+        self.sobre = self.ent_info.get()
 
-class app():
+        self.lista = [self.nome, self.email, self.phone, self.data, self.estado, self.sobre]
+
+        if self.nome=='':
+            messagebox.showerror("Erro", "Preencha todos os campos")
+        else:
+            inserir_info(lista)
+            messagebox.showinfo('Sucesso', 'Dados inseridos com Sucesso')
+            self.limpar_campos()
+
+class app(funcs):
 
     def __init__(self):
         self.janela = Tk()
@@ -82,22 +103,22 @@ class app():
         self.ent_dat_con.place(x=12,y=220)
 
         # ESTADO CONSULTA
-        self.lb_dat_con = Label(self.frame_baixo, text="Estado Consulta: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
-        self.lb_dat_con.place(x=150,y=190)
+        self.lb_estado = Label(self.frame_baixo, text="Estado Consulta: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
+        self.lb_estado.place(x=150,y=190)
 
-        self.ent_dat_con = Entry(self.frame_baixo, width=15,justify='left', relief='solid') #, backgroud='darkblue', foreground='white', borderwidth=2)
-        self.ent_dat_con.place(x=152,y=220)
+        self.ent_estado = Entry(self.frame_baixo, width=15,justify='left', relief='solid') #, backgroud='darkblue', foreground='white', borderwidth=2)
+        self.ent_estado.place(x=152,y=220)
 
-        # SOBRE CONSULTA
-        self.lb_dat_con = Label(self.frame_baixo, text="Informações Extra: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
-        self.lb_dat_con.place(x=10,y=250)
+        # INFORMAÇÕES DA CONSULTA
+        self.lb_info = Label(self.frame_baixo, text="Informações Extra: *", anchor=NW, font=('arial 10 bold'), bg=cor1, fg=cor4, relief='flat')
+        self.lb_info.place(x=10,y=250)
 
-        self.ent_dat_con = Entry(self.frame_baixo, width=35, justify='left', relief='solid')
-        self.ent_dat_con.place(x=12,y=280)
+        self.ent_info = Entry(self.frame_baixo, width=35, justify='left', relief='solid')
+        self.ent_info.place(x=12,y=280)
 
         ####################### Botoes ###########################
         # Inserir
-        self.bt_inserir = Button(self.frame_baixo, text="Inserir", width=10, anchor='center', font=('arial 10 bold'), bg=cor6, fg=cor1, relief='raised', overrelief='ridge')
+        self.bt_inserir = Button(self.frame_baixo, text="Inserir", width=10, anchor='center', font=('arial 10 bold'), bg=cor6, fg=cor1, relief='raised', overrelief='ridge', command=self.inserir_dados)
         self.bt_inserir.place(x=10,y=320)
 
         # Alterar
@@ -115,7 +136,8 @@ class app():
         
 
     def grid_view(self):
-        self.lista = [[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7]]
+        #self.lista = [[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7]]
+        self.lista = mostrar_info()
 
         # Lista HEAD
         self.tab_head = ['ID','Nome','email','telefone','Data','Estado','Sobre']
