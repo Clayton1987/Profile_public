@@ -4,7 +4,7 @@ import sqlite3 as dblite
 #Criando Conexao
 con= dblite.connect("dados.db")
 
-lista = ['Joao Futi Muanda','joao@mail.com',123456789,"12/19/2010",'Normal', 'Gostaria de uma Consulta']
+#lista = ['Joao Futi Muanda','joao@mail.com',123456789,"12/19/2010",'Normal', 'Gostaria de uma Consulta']
 
 #  Inserir Informações
 def inserir_info(i):

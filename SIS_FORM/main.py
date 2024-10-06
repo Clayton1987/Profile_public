@@ -27,6 +27,15 @@ cor9 = "#e9edf5" # skyblue
 
 ################ APP ######################
 class funcs():
+    def limpar_campos(self):
+        self.ent_nome.delete(0, END)
+        self.ent_email.delete(0, END)
+        self.ent_phone.delete(0, END)
+        self.ent_dat_con.delete(0, END)
+        self.ent_estado.delete(0, END)
+        self.ent_info.delete(0, END)
+
+
     def inserir_dados(self):
         # Inserir dados no banco de dados
         self.nome = self.ent_nome.get()
@@ -41,9 +50,11 @@ class funcs():
         if self.nome=='':
             messagebox.showerror("Erro", "Preencha todos os campos")
         else:
-            inserir_info(lista)
+            inserir_info(self.lista)
             messagebox.showinfo('Sucesso', 'Dados inseridos com Sucesso')
             self.limpar_campos()
+            self.grid_view().destroy()
+            self.grid_view()
 
 class app(funcs):
 
@@ -130,7 +141,7 @@ class app(funcs):
         self.bt_inserir.place(x=210,y=320)
 
         # Limpar
-        self.bt_inserir = Button(self.frame_baixo, text="Limpar", width=10, anchor='center', font=('arial 10 bold'), bg=cor3, fg=cor1, relief='raised', overrelief='ridge')
+        self.bt_inserir = Button(self.frame_baixo, text="Limpar", width=10, anchor='center', font=('arial 10 bold'), bg=cor3, fg=cor1, relief='raised', overrelief='ridge', command=self.limpar_campos)
         self.bt_inserir.place(x=110,y=350)
 
         
