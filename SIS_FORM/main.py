@@ -28,12 +28,18 @@ cor9 = "#e9edf5" # skyblue
 ################ APP ######################
 class funcs():
     def limpar_campos(self):
+        # Limpar dados do Formulario
         self.ent_nome.delete(0, END)
         self.ent_email.delete(0, END)
         self.ent_phone.delete(0, END)
         self.ent_dat_con.delete(0, END)
         self.ent_estado.delete(0, END)
         self.ent_info.delete(0, END)
+        try:
+            if self.bt_confirmar.winfo_exists():
+                self.bt_confirmar.destroy()
+        except:
+                pass
 
 
     def inserir_dados(self):
@@ -55,6 +61,55 @@ class funcs():
             self.limpar_campos()
             self.grid_view().destroy()
             self.grid_view()
+
+    def select_dados(self):
+        # select dados no banco de dados/GRID
+        self.treev_dados = self.tree.focus()
+        self.treev_dicionario = self.tree.item(self.treev_dados)
+        self.tree_lista = self.treev_dicionario['values']
+
+        self.valor = self.tree_lista[0]
+        self.limpar_campos()
+        self.ent_nome.insert(END, self.tree_lista[1])
+        self.ent_email.insert(END, self.tree_lista[2])
+        self.ent_phone.insert(END, self.tree_lista[3])
+        self.ent_dat_con.insert(END, self.tree_lista[4])
+        self.ent_estado.insert(END, self.tree_lista[5])
+        self.ent_info.insert(END, self.tree_lista[6])
+        #self.grid_view().destroy()
+        #self.grid_view()
+         # Botão Confirmar/Alteração
+        self.bt_confirmar = Button(self.frame_baixo, text="Confirmar", width=10, anchor='center', font=('arial 10 bold'), bg=cor2, fg=cor1, relief='raised', overrelief='ridge', command=self.update_dados)
+        self.bt_confirmar.place(x=110,y=320)
+
+    def update_dados(self):
+        # Atualizar dados no banco de dados
+        #self.select_dados()
+        # Botão Confirmar/Alteração
+        #self.bt_inserir = Button(self.frame_baixo, text="Confirmar", width=10, anchor='center', font=('arial 10 bold'), bg=cor2, fg=cor1, relief='raised', overrelief='ridge', command=self.update_dados)
+        #self.bt_inserir.place(x=110,y=320)
+        print(self.valor)
+        self.nome = self.ent_nome.get()
+        self.email = self.ent_email.get()
+        self.phone = self.ent_phone.get()
+        self.data = self.ent_dat_con.get()
+        self.estado = self.ent_estado.get()
+        self.sobre = self.ent_info.get()
+
+        self.lista = [self.nome, self.email, self.phone, self.data, self.estado, self.sobre, self.valor]
+
+        if self.nome=='':
+            messagebox.showerror("Erro", "Preencha todos os campos")
+            self.bt_confirmar.destroy()
+        else:
+            update_info(self.lista)
+            messagebox.showinfo('Atualizar', f'Dados do cadastro {self.valor} foram atualizados com Sucesso')
+            self.limpar_campos()
+            self.bt_confirmar.destroy()
+            self.grid_view().destroy()
+            self.grid_view()
+
+        
 
 class app(funcs):
 
@@ -133,16 +188,16 @@ class app(funcs):
         self.bt_inserir.place(x=10,y=320)
 
         # Alterar
-        self.bt_inserir = Button(self.frame_baixo, text="Alterar", width=10, anchor='center', font=('arial 10 bold'), bg=cor2, fg=cor1, relief='raised', overrelief='ridge')
-        self.bt_inserir.place(x=110,y=320)
+        self.bt_alterar = Button(self.frame_baixo, text="Alterar", width=10, anchor='center', font=('arial 10 bold'), bg=cor2, fg=cor1, relief='raised', overrelief='ridge', command=self.select_dados)
+        self.bt_alterar.place(x=110,y=320)
 
         # Deletar
-        self.bt_inserir = Button(self.frame_baixo, text="Deletar", width=10, anchor='center', font=('arial 10 bold'), bg=cor7, fg=cor1, relief='raised', overrelief='ridge')
-        self.bt_inserir.place(x=210,y=320)
+        self.bt_deletar = Button(self.frame_baixo, text="Deletar", width=10, anchor='center', font=('arial 10 bold'), bg=cor7, fg=cor1, relief='raised', overrelief='ridge')
+        self.bt_deletar.place(x=210,y=320)
 
         # Limpar
-        self.bt_inserir = Button(self.frame_baixo, text="Limpar", width=10, anchor='center', font=('arial 10 bold'), bg=cor3, fg=cor1, relief='raised', overrelief='ridge', command=self.limpar_campos)
-        self.bt_inserir.place(x=110,y=350)
+        self.bt_limpar = Button(self.frame_baixo, text="Limpar", width=10, anchor='center', font=('arial 10 bold'), bg=cor3, fg=cor1, relief='raised', overrelief='ridge', command=self.limpar_campos)
+        self.bt_limpar.place(x=110,y=350)
 
         
 

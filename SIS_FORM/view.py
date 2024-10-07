@@ -36,10 +36,14 @@ def mostrar_info():
 
 # Atualizar Informações
 def update_info(i):
-    i = ['joao',1]
+    #i = ['Joao Muanda','joao3@mail.com',123456789,"12/19/2010",'Normal', 'Gostaria de uma Consulta 4'] 
+    #i = ['joao',2]
+    print(i)
     with con:
         cur = con.cursor()
-        query = "UPDATE formulario SET nome=? WHERE id=?"
+        #query = "UPDATE formulario SET nome=? WHERE id=?"
+        
+        query = "UPDATE formulario SET nome=?, email=?, telefone=?, data_em=?, estado=?, info=? WHERE id=?"
         cur.execute(query, i)
 
 # Deletar Informações
