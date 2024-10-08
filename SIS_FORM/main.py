@@ -68,7 +68,8 @@ class funcs():
         self.treev_dicionario = self.tree.item(self.treev_dados)
         self.tree_lista = self.treev_dicionario['values']
 
-        self.valor = self.tree_lista[0]
+        self.valor_id = self.tree_lista[0]
+        self.v_nome = self.tree_lista[1]
         self.limpar_campos()
         self.ent_nome.insert(END, self.tree_lista[1])
         self.ent_email.insert(END, self.tree_lista[2])
@@ -88,7 +89,7 @@ class funcs():
         # Botão Confirmar/Alteração
         #self.bt_inserir = Button(self.frame_baixo, text="Confirmar", width=10, anchor='center', font=('arial 10 bold'), bg=cor2, fg=cor1, relief='raised', overrelief='ridge', command=self.update_dados)
         #self.bt_inserir.place(x=110,y=320)
-        print(self.valor)
+        print(self.valor_id)
         self.nome = self.ent_nome.get()
         self.email = self.ent_email.get()
         self.phone = self.ent_phone.get()
@@ -96,19 +97,35 @@ class funcs():
         self.estado = self.ent_estado.get()
         self.sobre = self.ent_info.get()
 
-        self.lista = [self.nome, self.email, self.phone, self.data, self.estado, self.sobre, self.valor]
+        self.lista = [self.nome, self.email, self.phone, self.data, self.estado, self.sobre, self.valor_id]
 
         if self.nome=='':
             messagebox.showerror("Erro", "Preencha todos os campos")
             self.bt_confirmar.destroy()
         else:
             update_info(self.lista)
-            messagebox.showinfo('Atualizar', f'Dados do cadastro {self.valor} foram atualizados com Sucesso')
+            messagebox.showinfo('Atualizar', f'Dados do cadastro {self.valor_id} foram atualizados com Sucesso')
             self.limpar_campos()
             self.bt_confirmar.destroy()
-            self.grid_view().destroy()
-            self.grid_view()
+            self.grid_view().update()
+            #self.grid_view()
 
+    def excluir_dados(self):
+        # Excluir dados no banco de dados
+        self.limpar_campos()
+        self.select_dados()        
+        #print(self.valor_id)
+        self.verif = messagebox.askokcancel('Confirmar', f'tem certeza que deseja excluir o item {self.valor_id} - {self.v_nome}')
+        print(self.verif)
+        if self.verif == True:
+            delete_info(self.valor_id)
+            self.limpar_campos()
+            self.grid_view().update()
+            #self.grid_view()
+        else:
+            pass
+
+        
         
 
 class app(funcs):
@@ -192,7 +209,7 @@ class app(funcs):
         self.bt_alterar.place(x=110,y=320)
 
         # Deletar
-        self.bt_deletar = Button(self.frame_baixo, text="Deletar", width=10, anchor='center', font=('arial 10 bold'), bg=cor7, fg=cor1, relief='raised', overrelief='ridge')
+        self.bt_deletar = Button(self.frame_baixo, text="Deletar", width=10, anchor='center', font=('arial 10 bold'), bg=cor7, fg=cor1, relief='raised', overrelief='ridge',command=self.excluir_dados)
         self.bt_deletar.place(x=210,y=320)
 
         # Limpar

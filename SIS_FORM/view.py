@@ -48,7 +48,8 @@ def update_info(i):
 
 # Deletar Informações
 def delete_info(i):
-    i = [1]
+    i = [i]
+    print(i)
     with con:
         cur = con.cursor()
         query = "DELETE FROM formulario WHERE id=?"
