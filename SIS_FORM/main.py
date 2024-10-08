@@ -15,12 +15,12 @@ from view import *
 
 cor0 = "#f0f3f5" # preta
 cor1 = "#feffff" # branca
-cor2 = "#4fa882" # verde
-cor3 = "#385f6b" # verde valor
+cor2 = "#A8B18E"  #"#4fa882" # verde
+cor3 = "#70765F" #"#385f6b" # verde valor
 cor4 = "#403d3d" # letra
 cor5 = "#e06636" # - profit
-cor6 = "#038cfc" # azul
-cor7 = "#ef5350" # vermelha
+cor6 = "#00A8AF"   ##038cfc" # azul
+cor7 = "#C5163C"   #"#ef5350" # vermelha
 cor8 = "#263238" # + verde
 cor9 = "#e9edf5" # skyblue
 
@@ -77,18 +77,14 @@ class funcs():
         self.ent_dat_con.insert(END, self.tree_lista[4])
         self.ent_estado.insert(END, self.tree_lista[5])
         self.ent_info.insert(END, self.tree_lista[6])
-        #self.grid_view().destroy()
-        #self.grid_view()
+        
          # Botão Confirmar/Alteração
         self.bt_confirmar = Button(self.frame_baixo, text="Confirmar", width=10, anchor='center', font=('arial 10 bold'), bg=cor2, fg=cor1, relief='raised', overrelief='ridge', command=self.update_dados)
         self.bt_confirmar.place(x=110,y=320)
 
     def update_dados(self):
         # Atualizar dados no banco de dados
-        #self.select_dados()
-        # Botão Confirmar/Alteração
-        #self.bt_inserir = Button(self.frame_baixo, text="Confirmar", width=10, anchor='center', font=('arial 10 bold'), bg=cor2, fg=cor1, relief='raised', overrelief='ridge', command=self.update_dados)
-        #self.bt_inserir.place(x=110,y=320)
+        
         print(self.valor_id)
         self.nome = self.ent_nome.get()
         self.email = self.ent_email.get()
