@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Consultoria</title>
+    <link rel="stylesheet" href="styles4.css">
+</head>
+<body>
+    <div class="container">
+        <div class="formulario">
+            <h1>Formulário de Consultoria</h1>
+            <form id="consultoriaForm">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" required>
+
+                <label for="dataConsulta">Data Consulta:</label>
+                <input type="date" id="dataConsulta" name="dataConsulta" value="2024-11-10" required>
+
+                <label for="estadoConsulta">Estado Consulta:</label>
+                <select id="estadoConsulta" name="estadoConsulta" required>
+                    <option value="norma">Norma</option>
+                    <option value="ativo">Ativo</option>
+                </select>
+
+                <label for="infoExtra">Informações Extra:</label>
+                <textarea id="infoExtra" name="infoExtra" required></textarea>
+
+                <div class="button-group">
+                    <button type="button" onclick="inserir()">Inserir</button>
+                    <button type="button" onclick="alterar()">Alterar</button>
+                    <button type="button" onclick="deletar()">Deletar</button>
+                    <button type="reset">Limpar</button>
+                </div>
+            </form>
+        </div>
+        <div class="tabela">
+            <table id="consultoriaTable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Data</th>
+                        <th>Estado</th>
+                        <th>Sobre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Conteúdo da tabela -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script2.js"></script>
+</body>
+</html>
